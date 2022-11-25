@@ -1,0 +1,25 @@
+{
+   "name": "pdf",
+   "version": "0.0.1",
+   "description": "",
+   "main": "dist/index.js",
+   "bin": {
+      "pdf": "./dist/index.js"
+   },
+   "scripts": {
+      "build": "npx tsc",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "figlet": "^1.5.2",
+      "puppeteer-core": "^19.3.0"
+   },
+   "devDependencies": {
+      "@types/commander": "^2.12.2",
+      "@types/node": "^18.11.9",
+      "typescript": "^4.8.4"
+   }
+}
