@@ -28,7 +28,7 @@ program
    // console.log(cmdOptions)
    console.log( msg( figlet.textSync( "PDFSHOT" ), 2 ) );
    console.log( "" )
-   console.log( msg( "Printing " + program.args[0] + " from " + program.args[1], 1 ) )
+   console.log( msg( "Printing " + program.args[ 0 ] + " from " + program.args[ 1 ], 1 ) )
    console.log( "" )
    console.log( "" )
 
@@ -68,7 +68,7 @@ program
    const page = await browser.newPage();
 
    // Website URL to export as pdf
-   const website_url = program.args[1];
+   const website_url = program.args[ 1 ];
 
    // Open URL in current page
    await page.goto( website_url, { waitUntil: 'networkidle0' } );
@@ -76,9 +76,16 @@ program
    //To reflect CSS used for screens instead of print
    await page.emulateMediaType( 'screen' );
 
+   const newInnerHTML: string = `<div style="display: block; font-size: 16px; background-color: white; color: blue"><p><br>${website_url}<br><br></p></div>`
+
+   await page.evaluate( ( newInnerHTML:string ) => {
+      const dom = document.body
+      dom.innerHTML = newInnerHTML + dom.innerHTML
+   }, newInnerHTML );
+
    // Downlaod the PDF
    const pdf = await page.pdf( {
-      path: program.args[0],
+      path: program.args[ 0 ],
       margin: { top: '20px', right: '20px', bottom: '20px', left: '20px' },
       printBackground: true,
       format: 'A4',
@@ -87,7 +94,7 @@ program
    // Close the browser instance
    await browser.close();
 
-   console.log(msg("Done!", 2))
+   console.log( msg( "Done!", 2 ) )
 } )();
 
 function msg( msg: string, severity = 0 ) {
