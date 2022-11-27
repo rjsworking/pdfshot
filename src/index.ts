@@ -50,7 +50,6 @@ program
         },
         ignoreHTTPSErrors: true,
         ignoreDefaultArgs: [ "--disable-extensions", "--enable-automation" ],
-        // executablePath: "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
 
         "args": [
             "--no-sandbox",
@@ -67,7 +66,6 @@ program
 
             // `--disable-extensions-except=${nocookies}`,
             `--load-extension=${nocookies},${noads}`,
-            // `--load-extension=${noads}`,
             '--enable-automation',
 
             // Windows NUL: equivalent to /dev/null
@@ -87,7 +85,6 @@ program
     if ( !program.args[ 1 ].startsWith( "htt" ) ) program.args[ 1 ] = "https://" + program.args[ 1 ]
 
     if ( os.platform() === "win32" ) {
-        // options.executablePath = "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
         options.executablePath = chrome
         options.args.push( '--disk-cache-dir=NUL:', '--media-cache-dir=NUL:' );
     }
@@ -116,7 +113,8 @@ program
     // To reflect CSS used for screens instead of print
     await page.emulateMediaType( 'screen' );
 
-    const newInnerHTML: string = `<div style="display: block; font-size: 16px; background-color: white; color: blue"><p><br>${website_url}<br><br></p></div>`
+    const newInnerHTML: string = `<div style="display: block; font-size: 16px; background-color: white; color: blue"><p><br>
+    <a href="${website_url}" target="_blank" rel="noopener noreferrer">${website_url}</a><br><br></p></div>`
 
     await page.evaluate( ( newInnerHTML: string ) => {
         const dom = document.body
